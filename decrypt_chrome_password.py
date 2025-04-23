@@ -17,7 +17,7 @@ CHROME_PATH = os.path.normpath(r"%s\AppData\Local\Google\Chrome\User Data"%(os.e
 def get_secret_key():
     try:
         #(1) Get secretkey from chrome local state
-        with open( CHROME_PATH_LOCAL_STATE, "r", encoding='utf-8') as f:
+        with open( CHROME_PATH_LOCAL_STATE, "r", encoding='ansi') as f:
             local_state = f.read()
             local_state = json.loads(local_state)
         secret_key = base64.b64decode(local_state["os_crypt"]["encrypted_key"])
@@ -66,7 +66,7 @@ def get_db_connection(chrome_path_login_db):
 if __name__ == '__main__':
     try:
         #Create Dataframe to store passwords
-        with open('decrypted_password.csv', mode='w', newline='', encoding='utf-8') as decrypt_password_file:
+        with open('decrypted_password.csv', mode='w', newline='', encoding='ansi') as decrypt_password_file:
             csv_writer = csv.writer(decrypt_password_file, delimiter=',')
             csv_writer.writerow(["index","url","username","password"])
             #(1) Get secret key
